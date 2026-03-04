@@ -1,5 +1,6 @@
 setup = function() {
     size(1200, 800);
+    image(sceneImage, 0, 0, 1200, 800);
 };
 
 //Background Images
@@ -15,11 +16,14 @@ var heavenImage = loadImage("https://images.stockcake.com/public/0/4/5/04599dc2-
 var sceneImage = hallImage;
 var sceneText = "Where do you want to go?  [Press a for left and d for right]";
 var emojis = ['🏀', '⚽', '🏐', '🏈', '🥎'];
+var cursor = "🚿"
+
+image(sceneImage, 0, 0, 1200, 800);
 
 draw = function(){
     
    drawScene();
-
+  //text(cursor,mouseX,mouseY);
 
    if(keyPressed){
 
@@ -27,24 +31,29 @@ draw = function(){
      if(key == 'a'){
        sceneImage = gardenImage;   
        sceneText = "The flowers are thirsty. Water them!  [Press s to go back]";
+       image(sceneImage, 0, 0, 1200, 800);
+       //text(cursor,mouseX,mouseY);
      } 
 
      //the main hall
      if(key == 's'){
       sceneImage = hallImage;
       sceneText = "Where do you want to go?  [Press a for left and d for right]";
+      image(sceneImage, 0, 0, 1200, 800);
      } 
 
      //the gym
      if(key == 'd'){
       sceneImage = gymImage;
       sceneText = "Fill the room! [Press s to go back]";
+      image(sceneImage, 0, 0, 1200, 800);
      }
 
      //heaven
      if(key == 'w'){
       sceneImage = heavenImage; 
       sceneText = "Oops! You went too far and found Heaven [Press s to go back]";
+      image(sceneImage, 0, 0, 1200, 800);
      }
    }
 
@@ -70,8 +79,9 @@ draw = function(){
 
 var drawScene = function(){
 
+if(sceneImage == hallImage){
     image(sceneImage, 0, 0, 1200, 800);
-
+}
     currentImage = sceneImage;
 
     fill(0,0,0);
@@ -83,6 +93,8 @@ var drawScene = function(){
     text(sceneText, 10, 755);
 };
 
+
+
 var drawBall = function (ballX,ballY) {
     textSize(64);
     var index = round(random(0,4));
@@ -93,8 +105,6 @@ var drawWater = function (waterX,waterY) {
     stroke(203,255,255);
     fill(203, 255, 255);
     ellipse(waterX,waterY,40,40);
-    textSize(64);
-    text("🚿", waterX,waterY);
 };
 
 var drawBlank = function () {
