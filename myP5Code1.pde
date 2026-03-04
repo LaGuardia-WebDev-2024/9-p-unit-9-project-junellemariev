@@ -59,7 +59,7 @@ draw = function(){
         }
 
       //restart
-        if(mouseClicked && sceneImage == heavenImage){
+        if(mousePressed && sceneImage == heavenImage){
           drawBlank();
           return false;
         }
@@ -101,5 +101,7 @@ var drawBlank = function () {
     stroke(255,255,255);
     fill(255,255,255);
     rect(0,0,1200,800);
+    textSize(120)
+    text("Press s to start again",600,400)
 };
 
