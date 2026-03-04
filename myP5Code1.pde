@@ -14,7 +14,7 @@ var heavenImage = loadImage("https://images.stockcake.com/public/0/4/5/04599dc2-
 //Variable Declarations
 var sceneImage = hallImage;
 var sceneText = "Where do you want to go?  [Press a for left and d for right]";
-var emojis = random['🏀', '⚽', '🏐', '🏈', '🥎'];
+var emojis = ['🏀', '⚽', '🏐', '🏈', '🥎'];
 
 draw = function(){
     
@@ -39,26 +39,41 @@ draw = function(){
      if(key == 'd'){
       sceneImage = gymImage;
       sceneText = "Fill the room! [Press s to go back]";
-
-        //ball animation
-        if(mouseClicked){
-          drawBall(mouseX,mouseY);
-        }
-
      }
 
      //heaven
      if(key == 'w'){
-      sceneImage = heavenImage;
-      sceneText = "Oops! You went so far you found Heaven [Press s to go back]";
+      sceneImage = heavenImage; 
+      sceneText = "Oops! You went too far and found Heaven [Press s to go back]";
      }
    }
-  
+
+      //ball animation
+        if(mousePressed && sceneImage == gymImage){
+          drawBall(mouseX,mouseY);
+        }
+
+      //water
+        if(mousePressed && sceneImage == gardenImage){
+          drawWater(mouseX,mouseY);
+        }
+
+      //restart
+        if(mouseClicked && sceneImage == heavenImage){
+          drawBlank();
+          return false;
+        }
 };
 
+
+
+
 var drawScene = function(){
+
     image(sceneImage, 0, 0, 1200, 800);
-    
+
+    currentImage = sceneImage;
+
     fill(0,0,0);
     rect(0, 700, 1200, 100);
       
@@ -70,7 +85,21 @@ var drawScene = function(){
 
 var drawBall = function (ballX,ballY) {
     textSize(64);
-    text(emojis, 50, 50);
+    var index = round(random(0,4));
+    text(emojis[index], ballX, ballY);
 };
 
+var drawWater = function (waterX,waterY) {
+    stroke(203,255,255);
+    fill(203, 255, 255);
+    ellipse(waterX,waterY,40,40);
+    textSize(64);
+    text("🚿", waterX,waterY);
+};
+
+var drawBlank = function () {
+    stroke(255,255,255);
+    fill(255,255,255);
+    rect(0,0,1200,800);
+};
 
